@@ -150,6 +150,13 @@ a { color: inherit; }
   color: var(--ink-faint);
 }
 
+.footnote {
+  margin: 0.875rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--ink-faint);
+  max-width: var(--measure);
+}
+
 /* Two columns once there is room: the sentence on the left, the sealed screen
    on the right, baselines starting together. Below that they stack. */
 @media (min-width: 56rem) {
@@ -388,6 +395,42 @@ a { color: inherit; }
   max-width: var(--measure);
   color: var(--ink-dim);
   margin: 1rem 0 0;
+}
+
+/* ── Insights ─────────────────────────────────────────────────────────── */
+
+/* Neutral, deliberately. This isn't the reveal transition and it isn't How
+   to play's legend, so it takes neither accent (docs/07 §2). */
+.insights {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.insight {
+  padding: 1.125rem 1.25rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.insight:last-child { border-bottom: 0; }
+
+.insight-tag {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin: 0 0 0.375rem;
+}
+
+.insight p {
+  margin: 0;
+  max-width: 32rem;
 }
 
 /* ── Install ──────────────────────────────────────────────────────────── */
