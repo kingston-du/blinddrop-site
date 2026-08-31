@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blind Drop — one song each, no names attached</title>
+<meta name="description" content="A daily blind music-guessing game for one private group of friends. Everyone drops one song before 8:00 PM. At 8:00 they are revealed as a numbered list, and you have two hours to work out who dropped what.">
+<meta name="theme-color" content="#EFF1F5">
+<link rel="icon" href="assets/icon.png" sizes="any">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="stylesheet" href="assets/style.css">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blind Drop — one song each, no names attached">
+<meta property="og:description" content="A daily blind music-guessing game for one private group of friends.">
+<meta property="og:image" content="assets/og.png">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+
+<header class="masthead wrap">
+  <a class="wordmark" href="/">Blind Drop</a>
+  <span class="stamp" id="phase-stamp">Sealed</span>
+</header>
+
+<main>
+  <section class="hero wrap">
+   <div class="hero-grid">
+    <div class="hero-copy">
+      <h1 class="display">One song each. No names attached.</h1>
+      <p>
+        A daily guessing game for one private group of friends. Everyone drops a song
+        before 8:00 PM — blind, with no idea what anyone else picked. At 8:00 the songs
+        come out as a numbered list and you have two hours to work out who dropped what.
+      </p>
+      <p class="hero-cta">
+        <a class="install" href="https://testflight.apple.com/join/qTcTqBkx">Get the beta</a>
+        <span class="hero-cta-note">TestFlight &middot; iPhone, iOS&nbsp;17.4+</span>
+      </p>
+    </div>
+
+    <div class="shot">
+      <img src="assets/screenshot.png" width="795" height="1400"
+           alt="The Blind Drop app with a song sealed: an amber card stamped shut, the line
+                &ldquo;Sealed until 8:00 PM&rdquo;, and a countdown reading 03:12:48.">
+      <p class="shot-caption">
+        Your own drop, sealed. Hold to peek at it; nobody else can, and you cannot see theirs.
+      </p>
+    </div>
+   </div>
+  </section>
+
+  <section class="section wrap">
+    <p class="eyebrow">8:00 PM</p>
+    <h2 class="display">Then everything opens at once</h2>
+    <p class="lede">
+      The songs arrive as a numbered list with no names on it. Try it — this is the
+      moment the whole game hangs on.
+    </p>
+
+    <!-- The flight. Sealed, the rows are genuinely empty: during the blind window
+         the app does not hide other people's drops from you, it never receives them
+         in the first place. Unsealing fills them in. -->
+    <div class="flight" id="flight">
+      <div class="flight-head">
+        <span class="label">Tonight's drop</span>
+        <span class="clock" id="flight-meta">Reveals 8:00 PM</span>
+      </div>
+
+      <ol class="rows">
+        <li class="row">
+          <span class="no">01</span>
+          <span class="slot">
+            <span class="sealed-label">Sealed</span>
+            <span class="revealed">
+              <span class="track">Teardrop</span><br>
+              <span class="artist">Massive Attack</span>
+            </span>
+          </span>
+          <span class="who revealed">Ivy</span>
+        </li>
+        <li class="row">
+          <span class="no">02</span>
+          <span class="slot">
+            <span class="sealed-label">Sealed</span>
+            <span class="revealed">
+              <span class="track">Cranes in the Sky</span><br>
+              <span class="artist">Solange</span>
+            </span>
+          </span>
+          <span class="who revealed">Dev</span>
+        </li>
+        <li class="row">
+          <span class="no">03</span>
+          <span class="slot">
+            <span class="sealed-label">Sealed</span>
+            <span class="revealed">
+              <span class="track">Bike</span><br>
+              <span class="artist">Pink Floyd</span>
+            </span>
+          </span>
+          <span class="who revealed">Ana</span>
+        </li>
+        <li class="row">
+          <span class="no">04</span>
+          <span class="slot">
+            <span class="sealed-label">Sealed</span>
+            <span class="revealed">
+              <span class="track">Little Dark Age</span><br>
+              <span class="artist">MGMT</span>
+            </span>
+          </span>
+          <span class="who revealed">Bo</span>
+        </li>
+        <li class="row">
+          <span class="no">05</span>
+          <span class="slot">
+            <span class="sealed-label">Sealed</span>
+            <span class="revealed">
+              <span class="track">Alright</span><br>
+              <span class="artist">Kendrick Lamar</span>
+            </span>
+          </span>
+          <span class="who revealed">Cass</span>
+        </li>
+      </ol>
+
+      <div class="flight-foot">
+        <button class="unseal" id="unseal" type="button">Unseal the flight</button>
+        <p class="flight-note" id="flight-note" hidden>
+          That is the reveal. In the app you would now have two hours to name all five.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <p class="eyebrow">A round, end to end</p>
+    <h2 class="display">Four steps, every day</h2>
+
+    <!-- The numbering is the round's own sequence, and the accents are the legend:
+         step 1 is the blind window, steps 2–4 are what happens once the information
+         is out. Ported from the app's How to play. -->
+    <ol class="phases">
+      <li class="phase">
+        <span class="at">Until 8</span>
+        <div>
+          <h3>Drop a song</h3>
+          <p>Search, pick one, seal it. You cannot see anyone else's, and nobody can see how many people have dropped — not even a count.</p>
+        </div>
+      </li>
+      <li class="phase">
+        <span class="at">8:00 PM</span>
+        <div>
+          <h3>The reveal</h3>
+          <p>Every song appears at once as an anonymous numbered list. Only people who dropped a song get to guess.</p>
+        </div>
+      </li>
+      <li class="phase">
+        <span class="at">8–10 PM</span>
+        <div>
+          <h3>Name them</h3>
+          <p>Assign a person to each number and lock in. Change your mind as often as you like until the clock runs out.</p>
+        </div>
+      </li>
+      <li class="phase">
+        <span class="at">10:00 PM</span>
+        <div>
+          <h3>Answers</h3>
+          <p>Who dropped what, who guessed right, and how unreadable you were. Every song joins the group's record, exportable to Apple Music or Spotify.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section wrap">
+    <p class="eyebrow">Install</p>
+    <h2 class="display">It is in TestFlight</h2>
+    <p class="install-note">
+      iPhone, iOS 17.4 or later. TestFlight is Apple's beta app — install that first,
+      then Blind Drop lands inside it.
+    </p>
+    <p style="margin-top:1.25rem">
+      <a class="install" href="https://testflight.apple.com/join/qTcTqBkx">Get the beta</a>
+    </p>
+  </section>
+</main>
+
+<footer class="foot wrap">
+  <span>Blind Drop</span>
+  <span>Not a music player. Not a playlist app. Not a social network.</span>
+</footer>
+
+<script>
+  (function () {
+    var flight = document.getElementById('flight');
+    var button = document.getElementById('unseal');
+    var meta   = document.getElementById('flight-meta');
+    var stamp  = document.getElementById('phase-stamp');
+    var note   = document.getElementById('flight-note');
+
+    button.addEventListener('click', function () {
+      flight.classList.add('is-open');
+      button.textContent = 'Revealed';
+      button.disabled = true;
+      // The count is a property of the reveal, never of the blind window.
+      meta.textContent = '5 songs';
+      note.hidden = false;
+      stamp.textContent = 'Revealed';
+      stamp.style.color = 'var(--ultramarine)';
+      stamp.style.background = 'var(--ultramarine-wash)';
+      stamp.style.borderColor = 'var(--ultramarine-edge)';
+    });
+  })();
+</script>
+
+</body>
+</html>

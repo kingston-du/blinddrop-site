@@ -1,0 +1,18 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["NNQ4DT9Z7Q.com.blinddrop.app"],
+        "components": [
+          {
+            "/": "/j/*",
+            "comment": "Invite links. Every other path on the domain opens in the browser."
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["NNQ4DT9Z7Q.com.blinddrop.app"]
+  }
+}

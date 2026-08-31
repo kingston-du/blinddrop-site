@@ -1,0 +1,7 @@
+# Cloudflare Pages equivalent of vercel.json's headers block. Kept in sync so a
+# host swap is a one-file decision rather than a rewrite. Apple requires the
+# association file to be served as application/json, with no extension and no
+# redirect; see the app repo's web/README.md.
+/.well-known/apple-app-site-association
+  Content-Type: application/json
+  Cache-Control: public, max-age=3600

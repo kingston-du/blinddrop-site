@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Blind Drop invite</title>
+<meta name="description" content="Join a Blind Drop group.">
+<meta name="theme-color" content="#EFF1F5">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/icon.png" sizes="any">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="masthead wrap">
+  <a class="wordmark" href="/">Blind Drop</a>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <h1 class="display">You have a group invite.</h1>
+    <p>
+      If Blind Drop is already installed, this link opens it. If you are reading this,
+      it is not — install the beta, then enter the code below by hand.
+    </p>
+
+    <div class="code-card">
+      <p class="label">Invite code</p>
+      <p class="code" id="code">—</p>
+    </div>
+
+    <p style="margin-top:1.75rem">
+      <a class="install" href="https://testflight.apple.com/join/qTcTqBkx">Get the beta</a>
+    </p>
+    <p class="install-note">
+      iPhone, iOS 17.4 or later. Open the app, choose <strong>Join a group</strong>,
+      and type the code.
+    </p>
+  </section>
+</main>
+
+<footer class="foot wrap">
+  <span>Blind Drop</span>
+  <span>Not a music player. Not a playlist app. Not a social network.</span>
+</footer>
+
+<script>
+  (function () {
+    // The universal link is https://blinddrop.app/j/<CODE>. If iOS resolved it the
+    // app opened and nobody is reading this page, so what matters here is the
+    // fallback: show the code so it can be typed in by hand.
+    //
+    // Six characters from the restricted alphabet in the app's InviteCode.swift
+    // (docs/03 §2) — I, L, O, 0 and 1 are excluded because the code gets read
+    // aloud across a room. The whole segment is validated rather than filtered:
+    // stripping non-alphabet characters out of "index.html" would leave
+    // "NDEXHT", which is exactly six characters of nonsense that looks like a
+    // real code. Whether the code *exists* is the server's call, not this page's.
+    var CODE = /^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{6}$/;
+    var raw = decodeURIComponent(window.location.pathname)
+                .split('/').filter(Boolean).pop() || '';
+    var code = raw.toUpperCase();
+    var el = document.getElementById('code');
+
+    if (CODE.test(code)) {
+      el.textContent = code;
+      document.title = 'Blind Drop invite ' + code;
+    } else {
+      el.textContent = 'Check your link';
+      el.style.fontSize = '1.25rem';
+      el.style.letterSpacing = '0';
+      el.style.color = 'var(--ink-dim)';
+    }
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,479 @@
+/* Blind Drop — tokens are ported verbatim from the app's design system
+   (blind-drop/docs/07-DESIGN-SYSTEM.md). Do not invent a value here; if the
+   app's palette changes, change it there first and copy it across. */
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("fonts/BricolageGrotesque.ttf") format("truetype-variations");
+  font-weight: 200 800;
+  font-stretch: 75% 100%;
+  font-display: swap;
+}
+
+:root {
+  /* Neutrals — cool, never warm. */
+  --paper:        #EFF1F5;
+  --paper-sunk:   #E7EAEF;
+  --surface:      #FFFFFF;
+  --edge:         #DCE0E7;
+  --edge-strong:  #D3D8E0;
+  --hairline:     #EAEDF1;
+
+  --ink:          #14161A;
+  --ink-dim:      #454B55;
+  --ink-faint:    #767C88;
+
+  /* Amber = sealed. Information is hidden. */
+  --amber:        #B26A06;
+  --amber-deep:   #96590A;
+  --amber-text:   #8A5205;
+  --amber-wash:   #F6EAD6;
+  --amber-edge:   #E6CFA6;
+
+  /* Ultramarine = revealed. Information is open. */
+  --ultramarine:      #2233C4;
+  --ultramarine-deep: #1B29A0;
+  --ultramarine-wash: #E3E6FA;
+  --ultramarine-edge: #C3C9F2;
+
+  --measure: 34rem;
+  --gutter: clamp(1.25rem, 5vw, 2.5rem);
+
+  /* The display face, always at its widest cut — the expanded cut is what
+     gives the numerals their character (docs/07 §3). */
+  --display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --body: -apple-system, BlinkMacSystemFont, "SF Pro Text", ui-sans-serif,
+          system-ui, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;   /* 17px — the app's bodyL */
+  line-height: 1.45;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The display face is never set below 20px; at small sizes its personality
+   reads as noise (docs/07 §3). */
+.display {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 100, "wght" 700;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  margin: 0;
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--ultramarine);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.wrap {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+/* ── Masthead ─────────────────────────────────────────────────────────── */
+
+.masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: clamp(1.5rem, 4vw, 2.25rem) 0;
+}
+
+.wordmark {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 100, "wght" 800;
+  font-weight: 800;
+  font-size: 1.375rem;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.masthead .stamp { flex: none; }
+
+/* The phase stamp — the app's own micro-label idiom. Amber while sealed. */
+.stamp {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber-text);
+  border: 1px solid var(--amber-edge);
+  background: var(--amber-wash);
+  border-radius: 3px;
+  padding: 0.25em 0.5em;
+  white-space: nowrap;
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+
+.hero { padding-block: clamp(2.5rem, 8vw, 4rem) 0; }
+
+.hero h1 {
+  font-size: clamp(2.5rem, 7.5vw, 3.5rem);
+  max-width: 13ch;
+}
+
+.hero-copy > p {
+  max-width: var(--measure);
+  color: var(--ink-dim);
+  margin: 1.125rem 0 0;
+}
+
+.hero-cta {
+  margin: 1.75rem 0 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+}
+
+.hero-cta-note {
+  font-size: 0.875rem;
+  color: var(--ink-faint);
+}
+
+/* Two columns once there is room: the sentence on the left, the sealed screen
+   on the right, baselines starting together. Below that they stack. */
+@media (min-width: 56rem) {
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 17rem;
+    gap: clamp(2rem, 5vw, 3.5rem);
+    align-items: start;
+  }
+  .hero-grid .shot { margin-top: 0.35rem; }
+  .hero-grid .shot img { max-width: 17rem; }
+}
+
+/* ── The flight ───────────────────────────────────────────────────────── */
+
+.flight {
+  margin-top: clamp(2rem, 6vw, 3rem);
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  overflow: hidden;   /* keeps the row washes inside the corner radius */
+}
+
+.flight-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem 1.125rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.flight-head .label {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.clock {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-dim);
+}
+
+.rows { list-style: none; margin: 0; padding: 0; }
+
+.row {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr auto;
+  align-items: center;
+  gap: 0 0.875rem;
+  padding: 0.8125rem 1.125rem;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--amber-wash);
+  transition: background 260ms ease;
+}
+
+.row:last-child { border-bottom: 0; }
+
+/* The numeral is the "mark" tier — it draws rather than writes. */
+.no {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 100, "wght" 800;
+  font-weight: 800;
+  font-size: 1.375rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--amber);
+  transition: color 260ms ease;
+}
+
+/* Sealed: the slot is genuinely empty. During the blind window the app does
+   not redact another member's drop — it never receives one. The empty row is
+   the accurate picture, so nothing is drawn here but the number. */
+.slot { min-height: 2.5rem; display: grid; align-content: center; }
+
+.sealed-label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber-text);
+}
+
+.revealed { display: none; }
+
+.track { font-weight: 600; letter-spacing: -0.01em; }
+.artist { color: var(--ink-dim); font-size: 0.9375rem; }
+
+.who {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--ultramarine);
+  justify-self: end;
+  white-space: nowrap;
+}
+
+/* Revealed state — set on the container, cascaded to the rows. */
+.flight.is-open .row { background: var(--surface); }
+.flight.is-open .no { color: var(--ultramarine); }
+.flight.is-open .sealed-label { display: none; }
+.flight.is-open .revealed { display: block; }
+
+/* One orchestrated moment: the rows resolve in sequence, ~600ms end to end,
+   matching the app's seal (docs/09). Nothing else on the page animates. */
+.flight.is-open .row { animation: resolve 320ms ease both; }
+.flight.is-open .row:nth-child(1) { animation-delay:   0ms; }
+.flight.is-open .row:nth-child(2) { animation-delay:  60ms; }
+.flight.is-open .row:nth-child(3) { animation-delay: 120ms; }
+.flight.is-open .row:nth-child(4) { animation-delay: 180ms; }
+.flight.is-open .row:nth-child(5) { animation-delay: 240ms; }
+
+@keyframes resolve {
+  from { opacity: 0.45; transform: translateY(3px); }
+  to   { opacity: 1;    transform: none; }
+}
+
+.flight-foot {
+  padding: 1rem 1.125rem 1.125rem;
+  border-top: 1px solid var(--hairline);
+}
+
+/* The unseal control carries the phase accent, because it *is* the phase
+   transition. Once spent it stops being a control. */
+.unseal {
+  font: inherit;
+  font-weight: 600;
+  width: 100%;
+  padding: 0.8125rem 1rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--amber);
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background 140ms ease;
+}
+
+.unseal:hover { background: var(--amber-deep); }
+
+.unseal[disabled] {
+  background: var(--paper-sunk);
+  color: var(--ink-faint);
+  cursor: default;
+}
+
+.flight-note {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--ink-dim);
+}
+
+/* ── Phases ───────────────────────────────────────────────────────────── */
+
+.section { padding-block: clamp(3rem, 9vw, 4.5rem) 0; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin: 0 0 1.25rem;
+}
+
+.section h2 { font-size: clamp(1.75rem, 5vw, 2.25rem); }
+
+/* The four steps are the four phases of a round, in order, so the numbering
+   carries real information and the accents are the legend — step 1 is the
+   blind window (amber), steps 2–4 are what happens once the information is
+   out (ultramarine). This is docs/07 §2's second carve-out, and it is the
+   only place on this page the two accents sit together. */
+.phases { list-style: none; margin: 1.5rem 0 0; padding: 0; }
+
+.phase {
+  display: grid;
+  grid-template-columns: 5.25rem 1fr;
+  gap: 0 1rem;
+  padding-block: 1.125rem;
+  border-top: 1px solid var(--edge);
+}
+
+.phase:last-child { border-bottom: 1px solid var(--edge); }
+
+.phase .at {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ultramarine);
+  padding-top: 0.15em;
+}
+
+.phase:first-child .at { color: var(--amber-text); }
+
+.phase h3 {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.phase p { margin: 0.25rem 0 0; color: var(--ink-dim); max-width: var(--measure); }
+
+/* ── Screenshot ───────────────────────────────────────────────────────── */
+
+.shot {
+  margin-top: clamp(2rem, 6vw, 2.75rem);
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+}
+
+/* The sealed screen is amber all the way to its edges, so it sits on paper with
+   the same 1pt edge every other surface gets. No shadow, no device frame — the
+   app has no shadows and a mocked-up titanium bezel would be the first
+   decoration on the page (docs/07 §2, Elevation). */
+.shot img {
+  width: 100%;
+  max-width: 16.5rem;
+  height: auto;
+  display: block;
+  border: 1px solid var(--edge);
+  border-radius: 14px;
+}
+
+.shot-caption {
+  margin: 0;
+  max-width: 26rem;
+  text-align: center;
+  font-size: 0.9375rem;
+  color: var(--ink-dim);
+}
+
+.lede {
+  max-width: var(--measure);
+  color: var(--ink-dim);
+  margin: 1rem 0 0;
+}
+
+/* ── Install ──────────────────────────────────────────────────────────── */
+
+/* Neutral on purpose. Installing is not a phase of a round, so it takes
+   neither accent — that keeps amber and ultramarine strictly semantic. */
+.install {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.8125rem 1.25rem;
+  border-radius: 8px;
+  transition: background 140ms ease;
+}
+
+.install:hover { background: #2A2E36; }
+
+.install-note {
+  margin: 0.875rem 0 0;
+  font-size: 0.9375rem;
+  color: var(--ink-dim);
+  max-width: var(--measure);
+}
+
+/* ── Invite ───────────────────────────────────────────────────────────── */
+
+.code-card {
+  margin-top: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+}
+
+.code-card .label {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin: 0 0 0.75rem;
+}
+
+.code {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 100, "wght" 800;
+  font-weight: 800;
+  font-size: clamp(2rem, 11vw, 2.75rem);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+  color: var(--ink);
+  word-break: break-all;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────── */
+
+.foot {
+  margin-top: clamp(3rem, 9vw, 4.5rem);
+  padding-block: 1.5rem 2.5rem;
+  border-top: 1px solid var(--edge);
+  color: var(--ink-faint);
+  font-size: 0.875rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  justify-content: space-between;
+}
+
+.foot a { color: var(--ink-dim); }
+
+@media (max-width: 30rem) {
+  .row { grid-template-columns: 2.25rem 1fr; }
+  .who { grid-column: 2; justify-self: start; margin-top: 0.15rem; }
+  .phase { grid-template-columns: 1fr; gap: 0.35rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+  }
+}
