@@ -17,7 +17,7 @@ LOCAL="$(dirname "$0")/.well-known/apple-app-site-association"
 fail=0
 
 read -r code type effective < <(
-  curl -sS -o /tmp/aasa.$$ -w '%{http_code} %{content_type} %{url_effective}' "$URL"
+  curl -sS -o /tmp/aasa.$$ -w '%{http_code} %{content_type} %{url_effective}\n' "$URL"
 )
 
 check() { if [ "$2" = "$3" ]; then echo "  ok    $1"; else echo "  FAIL  $1: expected '$3', got '$2'"; fail=1; fi; }
